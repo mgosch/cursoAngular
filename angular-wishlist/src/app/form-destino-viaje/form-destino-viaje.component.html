@@ -3,6 +3,11 @@
         <label	for="nombre">Nombre</label>
         <input	type="text"	class="form-control" id="nombre" placeholder="Ingresar nombre..."
         [formControl]="fg.controls['nombre']">
+        <ul>
+            <li *ngFor= "let r of searchResults;">
+                {{r}}
+            </li>
+        </ul>
         <div *ngIf="fg.controls['nombre'].hasError('required') && fg.controls['nombre'].touched">Nombre requerido</div>
         <div *ngIf="fg.controls['nombre'].hasError('invalidNombre')">Nombre inválido</div>
         <div *ngIf="fg.controls['nombre'].hasError('minLongNombre')">Nombre debe tener al menos {{minLong}} de largo</div>
