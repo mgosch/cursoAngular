@@ -37,14 +37,14 @@ import { DestinosApiClient } from '../../models/destinos-api-client.model';
   styleUrls: ['./destino-detalle.component.css'],
   providers: [ DestinosApiClient
   //  {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
-  //  {provide: DestinosApiClient, useFactory: DestinosApiClientDecorated},
+  //  {provide: DestinosApiClient, useClass: DestinosApiClientDecorated},
   //  {provide: DestinosApiClientViejo, useExisting: DestinosApiClient}
   ]
 })
 export class DestinoDetalleComponent implements OnInit {
   destino: DestinoViaje;
 
-  constructor(private route: ActivatedRoute, private destinoApiClient: DestinosApiClient) { }
+  constructor(private route: ActivatedRoute, private destinoApiClient: DestinosApiClient) { } //Viejo) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
