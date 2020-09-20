@@ -25,7 +25,8 @@ export enum DestinosViajesActionTypes {
     NUEVO_DESTINO = '[Destinos Viajes] Nuevo',
     ELEGIDO_FAVORITO = '[Destinos Viajes] Favorito',
     VOTE_UP = '[Destinos Viajes] Voto Positivo',
-    VOTE_DOWN = '[Destinos Viajes] Voto Negativo'
+    VOTE_DOWN = '[Destinos Viajes] Voto Negativo',
+    INIT_MY_DATA = '[Destinos Viajes] Init My Data'
 }
 
 export class NuevoDestinoAction implements Action {
@@ -47,8 +48,13 @@ export class VotoNegativoAction implements Action {
     type = DestinosViajesActionTypes.VOTE_DOWN;
     constructor(public destino: DestinoViaje) {}
 }
+
+export class InitMyDataAction implements Action {
+    type = DestinosViajesActionTypes.INIT_MY_DATA;
+    constructor(public destinos: string[]) {}
+  }
  
-export type DestinosViajesActions = NuevoDestinoAction | ElegidoFavoritoAction | VotoNegativoAction | VotoPositivoAction;
+export type DestinosViajesActions = NuevoDestinoAction | ElegidoFavoritoAction | VotoNegativoAction | VotoPositivoAction | InitMyDataAction;
 
 //REDUCERS
 export function reduceDestinosViaje(
@@ -79,6 +85,13 @@ export function reduceDestinosViaje(
                 neg.voteDown();
                 return {...state};
             }
+            case DestinosViajesActionTypes.INIT_MY_DATA: {
+                const destinos: string[] = (action as InitMyDataAction).destinos;
+                return {
+                    ...state,
+                    items: destinos.map((d) => new DestinoViaje(d, ''))
+                  };
+              }
         }
         return state;
     }
