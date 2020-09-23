@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Input, HostBinding, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DestinoViaje } from 'src/app/models/destino-viajes.model';
@@ -7,7 +8,23 @@ import { VotoNegativoAction, VotoPositivoAction } from '../../models/destinos-vi
 @Component({
   selector: 'app-destino-viaje',
   templateUrl: './destino-viaje.component.html',
-  styleUrls: ['./destino-viaje.component.css']
+  styleUrls: ['./destino-viaje.component.css'],
+  animations: [
+    trigger('esFavorito', [
+      state('estadoFavorito', style({
+        backgroundColor: 'PaleTurquoise'
+      })),
+      state('estadoNoFavorito', style({
+        backgroundColor: 'WhiteSmoke'
+      })),
+      transition('estadoNoFavorito => estadoFavorito', [
+        animate('3s')
+      ]),
+      transition('estadoFavorito => estadoNoFavorito', [
+        animate('1s')
+      ]),
+    ])
+  ]
 })
 export class DestinoViajeComponent implements OnInit {
 
